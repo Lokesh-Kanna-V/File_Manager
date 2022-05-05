@@ -11,11 +11,13 @@ source_path = f"C:/Users/iloke/Downloads/"
 imgs_path = f"C:/Users/iloke/Downloads/Pictures/"
 pdf_path = f"C:/Users/iloke/Downloads/PDF/"
 zip_path = f"C:/Users/iloke/Downloads/Zip/"
-unsplash_path =  f"C:/Users/iloke/Downloads/Unsplash"
+unsplash_path = f"C:/Users/iloke/Downloads/Unsplash"
 word_path = f"C:/Users/iloke/Downloads/WordDocs/"
 excel_path = f"C:/Users/iloke/Downloads/ExcelDocs/"
+powerpoint_path = f"C:/Users/iloke/Downloads/PowerPointDocs/"
 
 list = os.listdir(source_path)
+
 
 class Event(FileSystemEventHandler):
     def dispatch(self, event):
@@ -28,7 +30,8 @@ class Event(FileSystemEventHandler):
             unsplash_folder = zip_path + file_name
             word_folder = word_path + file_name
             excel_folder = excel_path + file_name
-            
+            powerpoint_folder = powerpoint_path + file_name
+
             if ".jpg" in file_name or ".png" in file_name or ".jpeg" in file_name:
                 shutil.move(source, img_folder)
                 print('Moved:', file_name, "to", img_folder)
@@ -47,6 +50,9 @@ class Event(FileSystemEventHandler):
             elif ".xlsx" in file_name:
                 shutil.move(source, excel_folder)
                 print('Moved:', file_name, "to", excel_folder)
+            elif ".pptx" in file_name:
+                shutil.move(source, powerpoint_folder)
+                print('Moved:', file_name, "to", powerpoint_folder)
 
 
 if __name__ == "__main__":
