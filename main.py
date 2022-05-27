@@ -1,11 +1,46 @@
 import sys
 import os
 import time
+import webbrowser
 import logging
 from watchdog.observers import Observer
 from watchdog.events import LoggingEventHandler
 from watchdog.events import FileSystemEventHandler
 import shutil
+from dotenv import load_dotenv
+
+load_dotenv()
+
+
+def wait(sec):
+    time.sleep(sec)
+
+
+# Work Automation
+Google_dashboard = os.getenv('G_Dashboard')
+Google_mail = os.getenv('G_Mail')
+# Google_calendar = os.getenv('G_Calendar')
+Google_chat = os.getenv('G_Chat')
+Google_drive = os.getenv('G_Drive')
+
+comorin_login = input("Do you want to login to Comorin? (y/n): ")
+
+if comorin_login == "y":
+    print("Ok, Logging in")
+    webbrowser.open(Google_dashboard)
+    wait(2)
+    # webbrowser.open(Google_calendar)
+    # wait(2)
+    webbrowser.open(Google_mail)
+    wait(2)
+    webbrowser.open(Google_drive)
+    wait(2)
+    webbrowser.open(Google_chat)
+    wait(2)
+    print("Logged in to Comorin Technologies")
+else:
+    print("Ok, Not Logging in")
+
 
 source_path = f"C:/Users/iloke/Downloads/"
 imgs_path = f"C:/Users/iloke/Downloads/Pictures/"
