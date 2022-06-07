@@ -7,9 +7,6 @@ from watchdog.observers import Observer
 from watchdog.events import LoggingEventHandler
 from watchdog.events import FileSystemEventHandler
 import shutil
-from dotenv import load_dotenv
-
-load_dotenv()
 
 
 def wait(sec):
@@ -17,26 +14,26 @@ def wait(sec):
 
 
 # Work Automation
-Google_dashboard = os.getenv('G_Dashboard')
-Google_mail = os.getenv('G_Mail')
-# Google_calendar = os.getenv('G_Calendar')
-Google_chat = os.getenv('G_Chat')
-Google_drive = os.getenv('G_Drive')
+# Google_dashboard = "https://workspace.google.com/dashboard"
+Google_mail = "https://mail.google.com/mail/u/0/"
+Google_calendar = "https://calendar.google.com"
+# Google_chat = "https://mail.google.com/chat/u/0/#chat/welcome"
+Google_drive = "https://drive.google.com/drive/u/0/folders/16RBo1CDsQqhzgsctJY6pZ03s1qW0cdhr"
 
 comorin_login = input("Do you want to login to Comorin? (y/n): ")
 
 if comorin_login == "y":
     print("Ok, Logging in")
-    webbrowser.open(Google_dashboard)
-    wait(2)
-    # webbrowser.open(Google_calendar)
+    # webbrowser.open(Google_dashboard)
     # wait(2)
-    webbrowser.open(Google_mail)
+    webbrowser.open(Google_calendar)
     wait(2)
     webbrowser.open(Google_drive)
     wait(2)
-    webbrowser.open(Google_chat)
+    webbrowser.open(Google_mail)
     wait(2)
+    # webbrowser.open(Google_chat)
+    # wait(2)
     print("Logged in to Comorin Technologies")
 else:
     print("Ok, Not Logging in")
@@ -44,6 +41,7 @@ else:
 
 source_path = f"C:/Users/iloke/Downloads/"
 imgs_path = f"C:/Users/iloke/Downloads/Pictures/"
+vids_path = f"C:/Users/iloke/Downloads/Videos/"
 pdf_path = f"C:/Users/iloke/Downloads/PDF/"
 zip_path = f"C:/Users/iloke/Downloads/Zip/"
 unsplash_path = f"C:/Users/iloke/Downloads/Unsplash"
@@ -60,6 +58,7 @@ class Event(FileSystemEventHandler):
         for file_name in os.listdir(source_path):
             source = source_path + file_name
             img_folder = imgs_path + file_name
+            vid_folder = vids_path + file_name
             pdf_folder = pdf_path + file_name
             zip_folder = zip_path + file_name
             unsplash_folder = zip_path + file_name
@@ -67,7 +66,7 @@ class Event(FileSystemEventHandler):
             excel_folder = excel_path + file_name
             powerpoint_folder = powerpoint_path + file_name
 
-            if ".jpg" in file_name or ".png" in file_name or ".jpeg" in file_name:
+            if ".jpg" in file_name or ".png" in file_name or ".jpeg" in file_name or ".gif" in file_name:
                 shutil.move(source, img_folder)
                 print('Moved:', file_name, "to", img_folder)
             elif ".pdf" in file_name:
@@ -86,6 +85,9 @@ class Event(FileSystemEventHandler):
                 shutil.move(source, excel_folder)
                 print('Moved:', file_name, "to", excel_folder)
             elif ".pptx" in file_name:
+                shutil.move(source, powerpoint_folder)
+                print('Moved:', file_name, "to", powerpoint_folder)
+            elif ".webm" in file_name or ".mp4" in file_name or ".mov" in file_name or ".avi" in file_name or ".mkv" in file_name:
                 shutil.move(source, powerpoint_folder)
                 print('Moved:', file_name, "to", powerpoint_folder)
 
